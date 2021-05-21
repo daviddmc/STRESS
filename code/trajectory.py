@@ -8,10 +8,8 @@ from scipy.interpolate import interp1d
 #kp = ['ankle_l', 'ankle_r', 'knee_l', 'knee_r', 'bladder', 'elbow_l', 'elbow_r',
 # 'eye_l', 'eye_r', 'hip_l', 'hip_r', 'shoulder_l', 'shoulder_r', 'wrist_l', 'wrist_r']
 
-def get_trajectory():
+def get_trajectory(folder=''):
 
-    folder = "/unborn/junshen/jointlabel/"
-    
     traj = []
     
     for f in os.listdir(folder):
@@ -50,42 +48,4 @@ def get_trajectory():
     return traj
     
 if __name__ == '__main__':
-    folder = "/unborn/junshen/jointlabel/"
-    
-    Rt_all = []
-    
-    for f in os.listdir(folder):
-        joint_coord = sio.loadmat(os.path.join(folder, f))['joint_coord'].astype(np.float32)
-        
-        joint_coord = joint_coord[np.all(joint_coord > 0, (1, 2))]
-    
-        eye_l = joint_coord[..., 7]
-        eye_r = joint_coord[..., 8]
-        neck = (joint_coord[..., 11] + joint_coord[..., 12]) / 2
-        
-        origin = (eye_l + eye_r + neck) / 3
-        
-        x_vec = eye_l - eye_r
-        x_vec = x_vec / np.linalg.norm(x_vec, ord=2, axis=-1, keepdims=True)
-        
-        neck_eye_l = neck - eye_l
-        y_vec = np.cross(x_vec, neck_eye_l)
-        y_vec = y_vec / np.linalg.norm(y_vec, ord=2, axis=-1, keepdims=True)
-        
-        z_vec = np.cross(x_vec, y_vec)
-        z_vec = z_vec / np.linalg.norm(z_vec, ord=2, axis=-1, keepdims=True)
-        
-        R = np.stack([x_vec, y_vec, z_vec], -1)
-        R = R[1:] @ np.transpose(R[:-1], (0, 2, 1))
-        R = Rotation.from_matrix(R).as_euler('xyz') # in rad
-        t = (origin[1:] - origin[:-1]) * 3 # in mm
-        Rt = np.concatenate([R, t], -1)
-        Rt_all.append(Rt)
-        
-    Rt_all = np.concatenate(Rt_all, 0)
-    np.save('rigid_param', Rt_all)
-    print(np.mean(Rt, 0))
-    print(np.std(Rt, 0))
-    print(np.median(Rt, 0))    
-        
-    
+    pass
