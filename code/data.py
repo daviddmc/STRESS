@@ -34,10 +34,8 @@ class EPIDataset(torch.utils.data.Dataset):
         self.folders = sorted(os.listdir(self.data_dir))
         if stage == 'test':
            self.folders = [folder for i, folder in enumerate(self.folders) if i % 6 == 0]
-        #elif stage == 'val':
-        #    self.folders = [folder for i, folder in enumerate(self.folders) if i % 6 == 0]
-        #else:
-        #    self.folders = [folder for i, folder in enumerate(self.folders) if folder not in data_test]
+        else:
+           self.folders = [folder for i, folder in enumerate(self.folders) if i % 6 != 0]
         self.proc = []
         self.res = []
         num_p = 10
@@ -77,10 +75,6 @@ class EPIDataset(torch.utils.data.Dataset):
                 else:
                     self.res.append(res)
             self.res = sorted(self.res, key=lambda x:x[-1])
-
-            #name = [x[-1] for x in self.res]
-            #np.save('name', name)
-            #raise Exception('test')
 
             if self.denoise_queue[0] is not None:
                 self.denoise_queue[0]['in'].put(None)
