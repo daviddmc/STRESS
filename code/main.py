@@ -44,29 +44,6 @@ if __name__ == "__main__":
 
     t_start = time()
     for i in range(1, num_iter+1):
-        '''
-        lr, hr = next(dataiter)
-        lr = lr.cuda()
-        hr = hr.cuda()
-
-        if not is_denoise:
-            out = model(lr[:, num_split-1-use_k:num_split+use_k])
-            loss = torch.mean(torch.abs(hr[:, num_split-1:num_split] - out))
-            loss_b = torch.mean(torch.abs(hr[:, num_split-1:num_split] - lr[:, num_split-1:num_split]))
-            average('loss', loss.item())
-            average('loss_b', loss_b.item())
-        else:
-            out = model(hr)
-            loss = torch.mean((hr - out)**2)
-            average('loss', loss.item())
-
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
-
-        if i % 100 == 0:
-            print("i = %d, %s, time = %d" % (i, average, time()-t_start))
-        '''
         if i % 1000 == 0 or i == num_iter:
             torch.save(model.state_dict(), "../results/" + model_name + "/" + model_name + ".pt")
 
