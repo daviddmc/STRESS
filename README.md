@@ -2,6 +2,10 @@
 
 STRESS: Super-Resolution for Dynamic Fetal MRI using Self-Supervised Learning ([Springer](https://link.springer.com/chapter/10.1007/978-3-030-87234-2_19)|[arXiv](https://arxiv.org/abs/2106.12407))
 
+## Usage
+
+run ```python main.py``` to train a model on the atlas dataset.
+
 ## Cite our work
 
 ```
