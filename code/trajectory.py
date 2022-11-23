@@ -8,7 +8,7 @@ from scipy.interpolate import interp1d
 #kp = ['ankle_l', 'ankle_r', 'knee_l', 'knee_r', 'bladder', 'elbow_l', 'elbow_r',
 # 'eye_l', 'eye_r', 'hip_l', 'hip_r', 'shoulder_l', 'shoulder_r', 'wrist_l', 'wrist_r']
 
-def get_trajectory(folder=''):
+def get_trajectory(folder='../trajectory'):
 
     traj = []
     
