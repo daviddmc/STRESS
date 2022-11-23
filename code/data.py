@@ -292,7 +292,8 @@ class SimDataset(torch.utils.data.Dataset):
         # use multiple processes to fetch data
         if self.is_test:
             imgs = [nib.load(f).get_fdata().astype(np.float32) / 1000.0 for f in files]
-            trajs = [trajs[t][0] for t in [0, 5, 10, 15, 20, 25, 30]]
+            # trajs = [trajs[t][0] for t in [0, 5, 10, 15, 20, 25, 30]]
+            trajs = [trajs[t][0] for t in len(trajs)]
             imgs_trajs = list(product(imgs, trajs))
             self.length = len(imgs_trajs)
             self.res = []
