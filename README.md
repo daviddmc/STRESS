@@ -4,7 +4,9 @@ STRESS: Super-Resolution for Dynamic Fetal MRI using Self-Supervised Learning ([
 
 ## Usage
 
-run ```python main.py``` to train a model on the atlas dataset.
+Run ```python main.py``` to train a model and test on the simulated dataset.
+
+You may create your own dataset following `EPIDataset` in `data.py`.
 
 ## Cite our work
 
