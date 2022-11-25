@@ -48,6 +48,7 @@ if __name__ == "__main__":
 
     t_start = time()
     for i in range(1, num_iter + 1):
+
         lr, hr = next(dataiter)
         lr = lr.cuda()
         hr = hr.cuda()
