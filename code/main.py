@@ -22,9 +22,9 @@ if __name__ == "__main__":
     else:
         model = EDSR(cin=2 * use_k + 1, n_resblocks=16, n_feats=64, res_scale=1).cuda()
 
-        model.load_state_dict(
-            torch.load("../results/" + model_name + "/" + model_name + ".pt")
-        )
+        #model.load_state_dict(
+        #    torch.load("../results/" + model_name + "/" + model_name + ".pt")
+        #)
 
     if denoiser is not None:
         denoiser_name = denoiser

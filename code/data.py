@@ -293,7 +293,7 @@ class SimDataset(torch.utils.data.Dataset):
         if self.is_test:
             imgs = [nib.load(f).get_fdata().astype(np.float32) / 1000.0 for f in files]
             # trajs = [trajs[t][0] for t in [0, 5, 10, 15, 20, 25, 30]]
-            trajs = [trajs[t][0] for t in len(trajs)]
+            trajs = [trajs[t][0] for t in range(len(trajs))]
             imgs_trajs = list(product(imgs, trajs))
             self.length = len(imgs_trajs)
             self.res = []
@@ -331,7 +331,7 @@ class SimDataset(torch.utils.data.Dataset):
             if len(self.res) == 0:
                 for i in range(self.length):
                     self.res.append(self.queue.get())
-                    print(i, self.length)
+                    #print(i, self.length)
                 if self.denoise_queue[0] is not None:
                     self.denoise_queue[0]['in'].put(None)
             return self.res[idx]
@@ -462,7 +462,6 @@ def sim_scan(img, num_split, traj, t0, dt, start, rot0, is_denoise=False, model=
 
 def denoise_fn(model, queues):
     model = model.cuda()
-    #print('test')
     while True:
         for q in queues:
             try:

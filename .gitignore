@@ -1,6 +1,7 @@
 /CRL_Fetal_Brain_Atlas_2017v3/*
 !/CRL_Fetal_Brain_Atlas_2017v3/README
 /results/*
+/_results/*
 .vscode/
 .mypy_cache/
 *.nii
